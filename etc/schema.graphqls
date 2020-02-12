@@ -1,0 +1,148 @@
+# Mageplaza
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Mageplaza.com license that is
+# available through the world-wide-web at this URL:
+# https://www.mageplaza.com/LICENSE.txt
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade this extension to newer
+# version in the future.
+#
+# @category    Mageplaza
+# @package     Mageplaza_FaqsGraphQl
+# @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+# @license     https://www.mageplaza.com/LICENSE.txt
+
+type Query {
+    MpMageplazaFaqsGetCategorys(
+        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategorys attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\FaqsGraphQl\Model\Resolver\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.") @cache(cacheable: false)
+    MpMageplazaFaqsGetArticles(
+        action: String! @doc(description: "Action in query.")
+        filter: MpMageplazaFaqsArticlesFilterInput @doc(description: "Identifies which MpMageplazaFaqsArticles attributes to search for and return.")
+        visibility: String @doc(description: "Visibility use in the filter. Apply when action is get_with_visibility.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\FaqsGraphQl\Model\Resolver\Article") @doc(description: "The query searches for MpMageplazaFaqsArticles that match the criteria specified in the filter.") @cache(cacheable: false)
+}
+
+input MpMageplazaFaqsCategorysFilterInput {
+    category_id: FilterTypeInput @doc(description: "Category Id")
+    name: FilterTypeInput @doc(description: "Name")
+    description: FilterTypeInput @doc(description: "Description")
+    store_ids: FilterTypeInput @doc(description: "Store Ids")
+    url_key: FilterTypeInput @doc(description: "Url Key")
+    icon: FilterTypeInput @doc(description: "Icon")
+    enabled: FilterTypeInput @doc(description: "Enabled")
+    meta_title: FilterTypeInput @doc(description: "Meta Title")
+    meta_description: FilterTypeInput @doc(description: "Meta Description")
+    meta_keywords: FilterTypeInput @doc(description: "Meta Keywords")
+    meta_robots: FilterTypeInput @doc(description: "Meta Robots")
+    position: FilterTypeInput @doc(description: "Position")
+    updated_at: FilterTypeInput @doc(description: "Updated At")
+    created_at: FilterTypeInput @doc(description: "Created At")
+}
+input MpMageplazaFaqsArticlesFilterInput {
+    article_id: FilterTypeInput @doc(description: "Article Id")
+    name: FilterTypeInput @doc(description: "Name")
+    author_name: FilterTypeInput @doc(description: "Author Name")
+    author_email: FilterTypeInput @doc(description: "Author Email")
+    status: FilterTypeInput @doc(description: "Status")
+    visibility: FilterTypeInput @doc(description: "Visibility")
+    article_content: FilterTypeInput @doc(description: "Article Content")
+    store_ids: FilterTypeInput @doc(description: "Store Ids")
+    positives: FilterTypeInput @doc(description: "Positives")
+    negatives: FilterTypeInput @doc(description: "Negatives")
+    views: FilterTypeInput @doc(description: "Views")
+    position: FilterTypeInput @doc(description: "Position")
+    url_key: FilterTypeInput @doc(description: "Url Key")
+    in_rss: FilterTypeInput @doc(description: "In Rss")
+    email_notify: FilterTypeInput @doc(description: "Email Notify")
+    meta_title: FilterTypeInput @doc(description: "Meta Title")
+    meta_description: FilterTypeInput @doc(description: "Meta Description")
+    meta_keywords: FilterTypeInput @doc(description: "Meta Keywords")
+    meta_robots: FilterTypeInput @doc(description: "Meta Robots")
+    updated_at: FilterTypeInput @doc(description: "Updated At")
+    created_at: FilterTypeInput @doc(description: "Created At")
+}
+
+type MpMageplazaFaqsCategorysOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpMageplazaFaqsCategorys] @doc(description: "MpMageplazaFaqsCategory data is satisfied"),
+    pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
+}
+type MpMageplazaFaqsArticlesOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpMageplazaFaqsArticles] @doc(description: "MpMageplazaFaqsArticle data is satisfied"),
+    pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
+}
+type ArticlesOutputNoPage {
+    total_count: Int @doc(description: "The number of categories returned"),
+    items: [MpMageplazaFaqsArticles] @doc(description: "An array of categories that match the specified search criteria")
+}
+type CategoriesOutputNoPage {
+    total_count: Int @doc(description: "The number of categories returned"),
+    items: [MpMageplazaFaqsCategorys] @doc(description: "An array of categories that match the specified search criteria")
+}
+type ProductsOutputNoPage {
+    total_count: Int @doc(description: "The number of categories returned"),
+    items: [MpMageplazaFaqsProducts] @doc(description: "An array of categories that match the specified search criteria")
+}
+
+type MpMageplazaFaqsCategorys {
+    category_id: Int @doc(description: "Category Id")
+    name: String @doc(description: "Name")
+    description: String @doc(description: "Description")
+    store_ids: String @doc(description: "Store Ids")
+    url_key: String @doc(description: "Url Key")
+    icon: String @doc(description: "Icon")
+    enabled: Int @doc(description: "Enabled")
+    meta_title: String @doc(description: "Meta Title")
+    meta_description: String @doc(description: "Meta Description")
+    meta_keywords: String @doc(description: "Meta Keywords")
+    meta_robots: String @doc(description: "Meta Robots")
+    position: Int @doc(description: "Position")
+    updated_at: String @doc(description: "Updated At")
+    created_at: String @doc(description: "Created At")
+    articles: ArticlesOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Article") @doc(description: "The article assigned to a category")
+}
+type MpMageplazaFaqsArticles {
+    article_id: Int @doc(description: "Article Id")
+    name: String @doc(description: "Name")
+    author_name: String @doc(description: "Author Name")
+    author_email: String @doc(description: "Author Email")
+    status: String @doc(description: "Status")
+    visibility: String @doc(description: "Visibility")
+    article_content: String @doc(description: "Article Content")
+    store_ids: String @doc(description: "Store Ids")
+    positives: Int @doc(description: "Positives")
+    negatives: Int @doc(description: "Negatives")
+    views: Int @doc(description: "Views")
+    position: Int @doc(description: "Position")
+    url_key: String @doc(description: "Url Key")
+    in_rss: Int @doc(description: "In Rss")
+    email_notify: Int @doc(description: "Email Notify")
+    meta_title: String @doc(description: "Meta Title")
+    meta_description: String @doc(description: "Meta Description")
+    meta_keywords: String @doc(description: "Meta Keywords")
+    meta_robots: String @doc(description: "Meta Robots")
+    updated_at: String @doc(description: "Updated At")
+    created_at: String @doc(description: "Created At")
+    categories: CategoriesOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
+    products: ProductsOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Product") @doc(description: "The products assigned to a Article")
+}
+type MpMageplazaFaqsProducts {
+    entity_id: Int @doc(description: "The ID number assigned to the product.")
+    attribute_set_id: Int @doc(description: "The attribute set assigned to the product.")
+    type_id: String @doc(description: "One of simple, virtual, bundle, downloadable, grouped, or configurable.")
+    sku: String @doc(description: "A number or code assigned to a product to identify the product, options, price, and manufacturer.")
+    has_options: Int @doc(description: "Indicates whether a product option is available.")
+    required_options: Int @doc(description: "Indicates whether a product option is required.")
+    created_at: String @doc(description: "Timestamp indicating when the product was created.")
+    updated_at: String @doc(description: "Timestamp indicating when the product was updated.")
+}
