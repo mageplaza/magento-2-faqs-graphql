@@ -28,6 +28,7 @@ use Mageplaza\Faqs\Model\Category as CategoryModel;
 use Mageplaza\Faqs\Model\Article as ArticleModel;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\DataProvider\Category;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\DataProvider\Article;
+use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\DataProvider\Product;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\SearchResult;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\SearchResultFactory;
 
@@ -52,20 +53,28 @@ class Filter
     private $categoryDataProvider;
 
     /**
+     * @var Product
+     */
+    private $productDataProvider;
+
+    /**
      * Filter constructor.
      *
      * @param SearchResultFactory $searchResultFactory
      * @param Article $articleDataProvider
+     * @param Product $productDataProvider
      * @param Category $categoryDataProvider
      */
     public function __construct(
         SearchResultFactory $searchResultFactory,
         Article $articleDataProvider,
+        Product $productDataProvider,
         Category $categoryDataProvider
     ) {
         $this->searchResultFactory  = $searchResultFactory;
         $this->postDataProvider     = $articleDataProvider;
         $this->categoryDataProvider = $categoryDataProvider;
+        $this->productDataProvider = $productDataProvider;
     }
 
     /**
@@ -86,6 +95,9 @@ class Filter
         switch ($type) {
             case 'category':
                 $list = $this->categoryDataProvider->getList($searchCriteria, $collection);
+                break;
+            case 'product':
+                $list = $this->productDataProvider->getList($searchCriteria, $collection);
                 break;
             case 'article':
             default:

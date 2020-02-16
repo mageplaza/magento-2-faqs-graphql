@@ -27,14 +27,13 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Mageplaza\Faqs\Model\Article;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
 
 /**
  * Class Post
  * @package Mageplaza\FaqsGraphQl\Model\Resolver\Resolver
  */
-class Category implements ResolverInterface
+class Article implements ResolverInterface
 {
     /**
      * @var SearchCriteriaBuilder
@@ -65,13 +64,13 @@ class Category implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        /** @var Article $article */
-        $article       = $value['model'];
-        $categoryCollection = $article->getSelectedCategoriesCollection();
-        $searchCriteria = $this->searchCriteriaBuilder->build('category', $args);
+        /** @var \Mageplaza\Faqs\Model\Category $article */
+        $category       = $value['model'];
+        $articleCollection = $category->getSelectedArticlesCollection();
+        $searchCriteria = $this->searchCriteriaBuilder->build('article', $args);
         $searchCriteria->setCurrentPage(1);
         $searchCriteria->setPageSize(10);
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'category', $categoryCollection);
+        $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection);
 
         return [
             'total_count' => $searchResult->getTotalCount(),

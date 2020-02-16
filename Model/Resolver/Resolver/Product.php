@@ -34,7 +34,7 @@ use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
  * Class Post
  * @package Mageplaza\FaqsGraphQl\Model\Resolver\Resolver
  */
-class Category implements ResolverInterface
+class Product implements ResolverInterface
 {
     /**
      * @var SearchCriteriaBuilder
@@ -67,11 +67,11 @@ class Category implements ResolverInterface
     {
         /** @var Article $article */
         $article       = $value['model'];
-        $categoryCollection = $article->getSelectedCategoriesCollection();
-        $searchCriteria = $this->searchCriteriaBuilder->build('category', $args);
+        $productCollection = $article->getSelectedProductsCollection();
+        $searchCriteria = $this->searchCriteriaBuilder->build('product', $args);
         $searchCriteria->setCurrentPage(1);
         $searchCriteria->setPageSize(10);
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'category', $categoryCollection);
+        $searchResult = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection);
 
         return [
             'total_count' => $searchResult->getTotalCount(),
