@@ -78,7 +78,7 @@ class Article implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $this->validateArgs($args);
-        $searchCriteria = $this->searchCriteriaBuilder->build('article', $args);
+        $searchCriteria = $this->searchCriteriaBuilder->build('articles', $args);
         $searchCriteria->setCurrentPage($args['currentPage']);
         $searchCriteria->setPageSize($args['pageSize']);
 

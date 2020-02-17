@@ -77,7 +77,7 @@ class Category implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $this->validateArgs($args);
-        $searchCriteria = $this->searchCriteriaBuilder->build('category', $args);
+        $searchCriteria = $this->searchCriteriaBuilder->build('categories', $args);
         $searchCriteria->setCurrentPage($args['currentPage']);
         $searchCriteria->setPageSize($args['pageSize']);
 
