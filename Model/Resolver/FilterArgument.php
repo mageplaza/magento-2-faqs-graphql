@@ -51,7 +51,7 @@ class FilterArgument implements FieldEntityAttributesInterface
      */
     public function getEntityAttributes(): array
     {
-        $entities = ['Category', 'Article'];
+        $entities = ['Category', 'Article', 'Product'];
         $fields   = [];
         foreach ($entities as $entity) {
             /** @var Field $field */

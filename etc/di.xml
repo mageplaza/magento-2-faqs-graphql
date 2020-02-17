@@ -27,7 +27,10 @@
                 <item name="article" xsi:type="object">
                     Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
                 </item>
-                <item name="categories" xsi:type="object">
+                <item name="category" xsi:type="object">
+                    Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
+                </item>
+                <item name="product" xsi:type="object">
                     Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
                 </item>
             </argument>
