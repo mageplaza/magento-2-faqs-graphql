@@ -81,17 +81,7 @@ class Article implements ResolverInterface
         $searchCriteria = $this->searchCriteriaBuilder->build('articles', $args);
         $searchCriteria->setCurrentPage($args['currentPage']);
         $searchCriteria->setPageSize($args['pageSize']);
-
-        switch ($args['action']) {
-            case 'get_all':
-                $collection = $this->_helperData->getArticleCollection();
-                break;
-            case 'get_with_visibility':
-                $collection = $this->_helperData->getArticleApiCollection();
-                break;
-            default:
-                throw new GraphQlInputException(__('No find your function'));
-        }
+        $collection = $this->_helperData->getArticleCollection();
 
         $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $collection);
 
@@ -142,20 +132,6 @@ class Article implements ResolverInterface
     }
 
     /**
-     * @param $args
-     * @return Collection
-     * @throws GraphQlInputException
-     * @throws NoSuchEntityException
-     */
-    protected function getArticleWithVisibility($args): Collection
-    {
-        if (!isset($args['visibility'])) {
-            throw new GraphQlInputException(__('visibility value is not null'));
-        }
-        return $this->_helperData->getArticleApiCollection()->addFieldToFilter('visibility',$args['visibility']);
-    }
-
-    /**
      * @param array $args
      *
      * @throws GraphQlInputException
@@ -164,10 +140,6 @@ class Article implements ResolverInterface
     {
         if (isset($args['currentPage']) && $args['currentPage'] < 1) {
             throw new GraphQlInputException(__('currentPage value must be greater than 0.'));
-        }
-
-        if (isset($args['pageSize']) && $args['pageSize'] < 1) {
-            throw new GraphQlInputException(__('pageSize value must be greater than 0.'));
         }
     }
 }
