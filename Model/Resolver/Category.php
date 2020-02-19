@@ -23,14 +23,15 @@ declare(strict_types=1);
 
 namespace Mageplaza\FaqsGraphQl\Model\Resolver;
 
+use Magento\Framework\Api\Search\SearchCriteriaInterface;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\Faqs\Helper\Data;
-use Mageplaza\Faqs\Model\ResourceModel\Category\Collection;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
+use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\SearchResult;
 
 /**
  * Class Category
@@ -95,8 +96,8 @@ class Category implements ResolverInterface
     }
 
     /**
-     * @param $searchResult
-     * @param $searchCriteria
+     * @param SearchResult $searchResult
+     * @param SearchCriteriaInterface $searchCriteria
      * @param $args
      *
      * @return array
@@ -129,22 +130,6 @@ class Category implements ResolverInterface
             'startPage'       => 1,
             'endPage'         => $maxPages,
         ];
-    }
-
-    /**
-     * @param $args
-     *
-     * @return Collection
-     * @throws GraphQlInputException
-     */
-    protected function getCategoryByPostId($args): Collection
-    {
-        if (!isset($args['postId'])) {
-            throw new GraphQlInputException(__('postId value is not null'));
-        }
-        $post = $this->_helperData->getFactoryByType()->create()->load($args['postId']);
-
-        return $post->getSelectedCategoriesCollection();
     }
 
     /**

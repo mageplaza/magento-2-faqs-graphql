@@ -33,6 +33,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Faqs\Helper\Data;
+use Mageplaza\Faqs\Model\Article as ArticleModel;
 use Mageplaza\Faqs\Model\ArticleFactory;
 use Mageplaza\Faqs\Model\Config\Source\Visibility;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
@@ -97,6 +98,7 @@ class SubmitQuestion implements ResolverInterface
      * @param StoreManagerInterface $storeManager
      * @param ArticleFactory $articleFactory
      * @param ProductRepository $productRepository
+     * @param Data $helper
      */
     public function __construct(
         Filter $filter,
@@ -144,6 +146,7 @@ class SubmitQuestion implements ResolverInterface
             'created_at'   => $createdAt,
             'updated_at'   => $updatedAt
         ];
+        /** @var ArticleModel $articleModel */
         $articleModel = $this->_articleFactory->create();
         if (!empty($params['product_id'])) {
             $articleData ['product_id'] = (int) $params['product_id'];

@@ -55,7 +55,7 @@ class SearchResultFactory
     {
         return $this->objectManager->create(
             SearchResult::class,
-            ['totalCount' => $totalCount, 'itemsSearchResult' => $itemsSearchResult]
+            compact('totalCount', 'itemsSearchResult')
         );
     }
 }

@@ -23,15 +23,15 @@ declare(strict_types=1);
 
 namespace Mageplaza\FaqsGraphQl\Model\Resolver;
 
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Api\Search\SearchCriteriaInterface;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\Faqs\Helper\Data;
-use Mageplaza\Faqs\Model\ResourceModel\Article\Collection;
 use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
+use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\SearchResult;
 
 /**
  * Class Article
@@ -95,8 +95,8 @@ class Article implements ResolverInterface
     }
 
     /**
-     * @param $searchResult
-     * @param $searchCriteria
+     * @param SearchResult $searchResult
+     * @param SearchCriteriaInterface $searchCriteria
      * @param $args
      *
      * @return array
