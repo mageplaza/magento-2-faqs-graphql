@@ -32,7 +32,7 @@ type Query {
 type Mutation {
     MpMageplazaFaqsAddQuestions(
         input: MpMageplazaFaqsQuestionInput! @doc(description: "Information of the question is submit.")
-    ):MpMageplazaFaqsQuestionOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\SubmitQuestion") @doc(description: "Save gift code")
+    ):MpMageplazaFaqsQuestionOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\SubmitQuestion") @doc(description: "Add new question.")
 }
 
 input MpMageplazaFaqsQuestionInput {
