@@ -179,7 +179,7 @@ class SubmitQuestion implements ResolverInterface
         }
 
         return [
-            'notify' => '',
+            'notify' => __('Question is added successfully'),
             'status' => true
         ];
     }
