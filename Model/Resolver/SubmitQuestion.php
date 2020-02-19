@@ -109,12 +109,12 @@ class SubmitQuestion implements ResolverInterface
         ProductRepository $productRepository,
         Data $helper
     ) {
-        $this->filter          = $filter;
-        $this->helper          = $helper;
-        $this->_date           = $dateTime;
-        $this->_logger         = $logger;
-        $this->_storeManager   = $storeManager;
-        $this->_articleFactory = $articleFactory;
+        $this->filter            = $filter;
+        $this->helper            = $helper;
+        $this->_date             = $dateTime;
+        $this->_logger           = $logger;
+        $this->_storeManager     = $storeManager;
+        $this->_articleFactory   = $articleFactory;
         $this->productRepository = $productRepository;
     }
 
@@ -132,9 +132,9 @@ class SubmitQuestion implements ResolverInterface
         $updatedAt = $this->_date->date();
         $createdAt = $updatedAt;
 
-        $visibility   = ($this->helper->getConfigGeneral('question/need_approved'))
+        $visibility  = ($this->helper->getConfigGeneral('question/need_approved'))
             ? Visibility::NEED_APPROVED : Visibility::HIDDEN;
-        $articleData  = [
+        $articleData = [
             'name'         => strip_tags($params['content']),
             'author_name'  => strip_tags((isset($params['name']) ? $params['name'] : 'Guest')),
             'author_email' => isset($params['email']) ? $params['email'] : 'Guest@gmail.com',
@@ -202,6 +202,10 @@ class SubmitQuestion implements ResolverInterface
 
         if (isset($data['product_id']) && !is_numeric($data['product_id'])) {
             throw new GraphQlInputException(__('Product Id value must be integer.'));
+        }
+
+        if (isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new GraphQlInputException(__('Email has a wrong format'));
         }
 
         if (isset($data['product_id']) && !$this->productRepository->getById($data['product_id'])->getId()) {
