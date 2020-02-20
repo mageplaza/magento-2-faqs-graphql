@@ -24,10 +24,10 @@ declare(strict_types=1);
 namespace Mageplaza\FaqsGraphQl\Model\Resolver\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
+use Mageplaza\Faqs\Helper\Data;
+use Mageplaza\Faqs\Model\Filter\Query\Filter;
 
 /**
  * Class Post
@@ -36,27 +36,26 @@ use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
 class Article implements ResolverInterface
 {
     /**
-     * @var SearchCriteriaBuilder
-     */
-    private $searchCriteriaBuilder;
-
-    /**
      * @var Filter
      */
     protected $filterQuery;
+    /**
+     * @var Data
+     */
+    private $helperData;
 
     /**
      * Post constructor.
      *
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param Data $helperData
      * @param Filter $filterQuery
      */
     public function __construct(
-        SearchCriteriaBuilder $searchCriteriaBuilder,
+        Data $helperData,
         Filter $filterQuery
     ) {
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterQuery           = $filterQuery;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -64,17 +63,16 @@ class Article implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        /** @var \Mageplaza\Faqs\Model\Category $article */
         $category       = $value['model'];
         $articleCollection = $category->getSelectedArticlesCollection();
-        $searchCriteria = $this->searchCriteriaBuilder->build('article', $args);
-        $searchCriteria->setCurrentPage(1);
-        $searchCriteria->setPageSize(10);
+        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'articles');
         $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection);
+        $pageInfo = $this->helperData->getPageInfo($searchResult->getItemsSearchResult(), $searchCriteria, $args);
 
         return [
-            'total_count' => $searchResult->getTotalCount(),
-            'items'       => $searchResult->getItemsSearchResult()
+            'total_count' => count($searchResult->getItemsSearchResult()),
+            'items'       => $searchResult->getItemsSearchResult(),
+            'pageInfo'    => $pageInfo
         ];
     }
 }

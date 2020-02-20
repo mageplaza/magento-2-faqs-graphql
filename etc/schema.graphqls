@@ -21,12 +21,12 @@ type Query {
         filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategorys attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.") @cache(cacheable: false)
+    ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.")
     MpMageplazaFaqsGetArticles(
         filter: MpMageplazaFaqsArticlesFilterInput @doc(description: "Identifies which MpMageplazaFaqsArticles attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Article") @doc(description: "The query searches for MpMageplazaFaqsArticles that match the criteria specified in the filter.") @cache(cacheable: false)
+    ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Article") @doc(description: "The query searches for MpMageplazaFaqsArticles that match the criteria specified in the filter.")
 }
 
 type Mutation {
@@ -98,14 +98,6 @@ type MpMageplazaFaqsArticlesOutput {
     items: [MpMageplazaFaqsArticle] @doc(description: "MpMageplazaFaqsArticle data is satisfied"),
     pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
 }
-type ArticlesOutputNoPage {
-    total_count: Int @doc(description: "The number of categories returned"),
-    items: [MpMageplazaFaqsArticle] @doc(description: "An array of categories that match the specified search criteria")
-}
-type CategoriesOutputNoPage {
-    total_count: Int @doc(description: "The number of categories returned"),
-    items: [MpMageplazaFaqsCategory] @doc(description: "An array of categories that match the specified search criteria")
-}
 type ProductsOutputNoPage {
     total_count: Int @doc(description: "The number of categories returned"),
     items: [MpMageplazaFaqsProduct] @doc(description: "An array of categories that match the specified search criteria")
@@ -126,7 +118,11 @@ type MpMageplazaFaqsCategory {
     position: Int @doc(description: "Position")
     updated_at: String @doc(description: "Updated At")
     created_at: String @doc(description: "Created At")
-    articles: ArticlesOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Article") @doc(description: "The article assigned to a category")
+    articles(
+        filter: MpMageplazaFaqsArticlesFilterInput @doc(description: "Identifies which MpMageplazaFaqsArticlesFilter attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ): MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Article") @doc(description: "The article assigned to a category")
 }
 type MpMageplazaFaqsArticle {
     article_id: Int @doc(description: "Article Id")
@@ -150,8 +146,15 @@ type MpMageplazaFaqsArticle {
     meta_robots: String @doc(description: "Meta Robots")
     updated_at: String @doc(description: "Updated At")
     created_at: String @doc(description: "Created At")
-    categories: CategoriesOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
-    products: ProductsOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Product") @doc(description: "The products assigned to a Article")
+    categories(
+        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategorys attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ): MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
+    products(
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ): ProductsOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Product") @doc(description: "The products assigned to a Article")
 }
 type MpMageplazaFaqsProduct {
     entity_id: Int @doc(description: "The ID number assigned to the product.")

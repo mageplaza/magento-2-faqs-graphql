@@ -36,7 +36,7 @@ use Mageplaza\Faqs\Helper\Data;
 use Mageplaza\Faqs\Model\Article as ArticleModel;
 use Mageplaza\Faqs\Model\ArticleFactory;
 use Mageplaza\Faqs\Model\Config\Source\Visibility;
-use Mageplaza\FaqsGraphQl\Model\Resolver\Filter\Query\Filter;
+use Mageplaza\Faqs\Model\Filter\Query\Filter;
 use Psr\Log\LoggerInterface;
 
 /**
