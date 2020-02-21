@@ -63,15 +63,17 @@ class Article implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
+        /** @var \Mageplaza\Faqs\Model\Category $category */
         $category       = $value['model'];
         $articleCollection = $category->getSelectedArticlesCollection();
         $searchCriteria = $this->helperData->validateAndAddFilter($args, 'articles');
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection);
-        $pageInfo = $this->helperData->getPageInfo($searchResult->getItemsSearchResult(), $searchCriteria, $args);
+        $items = [];
+        $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection, $items);
+        $pageInfo = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [
-            'total_count' => count($searchResult->getItemsSearchResult()),
-            'items'       => $searchResult->getItemsSearchResult(),
+            'total_count' => $searchResult->getTotalCount(),
+            'items'       => $items,
             'pageInfo'    => $pageInfo
         ];
     }

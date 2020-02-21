@@ -69,16 +69,17 @@ class Product implements ResolverInterface
         $article       = $value['model'];
         $productCollection = $article->getSelectedProductsCollection();
         $searchCriteria = $this->helperData->validateAndAddFilter($args, 'product');
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection);
+        $items = [];
+        $searchResult = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection, $items);
         $pageInfo          = $this->helperData->getPageInfo(
-            $searchResult->getItemsSearchResult(),
+            $items,
             $searchCriteria,
             $args
         );
 
         return [
-            'total_count' => count($searchResult),
-            'items'       => $searchResult->getItemsSearchResult(),
+            'total_count' => $searchResult->getTotalCount(),
+            'items'       => $items,
             'pageInfo'    => $pageInfo
         ];
     }

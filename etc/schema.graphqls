@@ -17,8 +17,8 @@
 # @license     https://www.mageplaza.com/LICENSE.txt
 
 type Query {
-    MpMageplazaFaqsGetCategorys(
-        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategorys attributes to search for and return.")
+    MpMageplazaFaqsCategoryList(
+        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategoryList attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
     ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.")
@@ -122,7 +122,7 @@ type MpMageplazaFaqsCategory {
         filter: MpMageplazaFaqsArticlesFilterInput @doc(description: "Identifies which MpMageplazaFaqsArticlesFilter attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ): MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Article") @doc(description: "The article assigned to a category")
+    ): MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Article") @doc(description: "The article assigned to a category") @cache(cacheable: false)
 }
 type MpMageplazaFaqsArticle {
     article_id: Int @doc(description: "Article Id")

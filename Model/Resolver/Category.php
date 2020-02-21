@@ -27,7 +27,7 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\Faqs\Helper\Data;
-use Mageplaza\Faqs\Api\FaqsRepositoryInterface;
+use Mageplaza\Faqs\Model\Filter\Query\Filter;
 
 /**
  * Class Category
@@ -36,26 +36,26 @@ use Mageplaza\Faqs\Api\FaqsRepositoryInterface;
 class Category implements ResolverInterface
 {
     /**
-     * @var FaqsRepositoryInterface
-     */
-    private $faqsRepository;
-    /**
      * @var Data
      */
     private $helperData;
+    /**
+     * @var Filter
+     */
+    private $filter;
 
     /**
      * Categories constructor.
      *
-     * @param FaqsRepositoryInterface $faqsRepository
+     * @param Filter $filter
      * @param Data $helperData
      */
     public function __construct(
-        FaqsRepositoryInterface $faqsRepository,
+        Filter $filter,
         Data $helperData
     ) {
-        $this->faqsRepository        = $faqsRepository;
         $this->helperData = $helperData;
+        $this->filter = $filter;
     }
 
     /**
@@ -64,11 +64,14 @@ class Category implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
-        $items        = $this->faqsRepository->getCategories($searchCriteria);
+        $items        = [];
+
+        $searchResult = $this->filter->getResult($searchCriteria, 'category', null, $items);
+
         $pageInfo = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [
-            'total_count' => count($items),
+            'total_count' => $searchResult->getTotalCount(),
             'items'       => $items,
             'pageInfo'    => $pageInfo
         ];
