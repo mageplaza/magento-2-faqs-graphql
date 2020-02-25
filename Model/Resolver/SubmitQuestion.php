@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace Mageplaza\FaqsGraphQl\Model\Resolver;
 
-use Exception;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
@@ -36,7 +35,6 @@ use Mageplaza\Faqs\Api\FaqsRepositoryInterface;
 use Mageplaza\Faqs\Helper\Data;
 use Mageplaza\Faqs\Model\Article as ArticleModel;
 use Mageplaza\Faqs\Model\ArticleFactory;
-use Mageplaza\Faqs\Model\Config\Source\Visibility;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
 use Psr\Log\LoggerInterface;
 

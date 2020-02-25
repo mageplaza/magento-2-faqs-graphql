@@ -30,7 +30,7 @@ use Mageplaza\Faqs\Helper\Data;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
 
 /**
- * Class Post
+ * Class Article
  * @package Mageplaza\FaqsGraphQl\Model\Resolver\Resolver
  */
 class Article implements ResolverInterface
