@@ -66,8 +66,8 @@ class Article implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $searchCriteria = $this->_helperData->validateAndAddFilter($args, 'articles');
-        $items          = [];
-        $searchResult = $this->filter->getResult($searchCriteria, 'article', null, $items);
+        $searchResult = $this->filter->getResult($searchCriteria, 'article', null);
+        $items          = $this->_helperData->getApiSearchResult($searchResult);
         $pageInfo = $this->_helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [

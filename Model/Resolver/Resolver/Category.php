@@ -68,8 +68,8 @@ class Category implements ResolverInterface
         $articleCollection = $article->getSelectedCategoriesCollection();
 
         $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'categories');
-        $items = [];
-        $searchResult      = $this->filterQuery->getResult($searchCriteria, 'category', $articleCollection, $items);
+        $searchResult      = $this->filterQuery->getResult($searchCriteria, 'category', $articleCollection);
+        $items             = $this->helperData->getApiSearchResult($searchResult);
         $pageInfo          = $this->helperData->getPageInfo(
             $items,
             $searchCriteria,
