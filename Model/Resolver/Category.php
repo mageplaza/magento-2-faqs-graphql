@@ -26,7 +26,7 @@ namespace Mageplaza\FaqsGraphQl\Model\Resolver;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Mageplaza\Faqs\Helper\Data;
+use Mageplaza\FaqsGraphQl\Helper\Data;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
 
 /**
@@ -64,7 +64,7 @@ class Category implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
-        $searchResult = $this->filter->getResult($searchCriteria, 'category', null);
+        $searchResult = $this->filter->getResult($searchCriteria, 'category');
         $items        = $this->helperData->getApiSearchResult($searchResult);
 
         $pageInfo = $this->helperData->getPageInfo($items, $searchCriteria, $args);

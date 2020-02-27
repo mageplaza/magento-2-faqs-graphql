@@ -26,7 +26,7 @@ namespace Mageplaza\FaqsGraphQl\Model\Resolver\Resolver;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Mageplaza\Faqs\Helper\Data;
+use Mageplaza\FaqsGraphQl\Helper\Data;
 use Mageplaza\Faqs\Model\Article;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
 

@@ -26,7 +26,7 @@ namespace Mageplaza\FaqsGraphQl\Model\Resolver;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Mageplaza\Faqs\Helper\Data;
+use Mageplaza\FaqsGraphQl\Helper\Data;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
 
 /**
@@ -66,7 +66,7 @@ class Article implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $searchCriteria = $this->_helperData->validateAndAddFilter($args, 'articles');
-        $searchResult = $this->filter->getResult($searchCriteria, 'article', null);
+        $searchResult = $this->filter->getResult($searchCriteria);
         $items          = $this->_helperData->getApiSearchResult($searchResult);
         $pageInfo = $this->_helperData->getPageInfo($items, $searchCriteria, $args);
 
