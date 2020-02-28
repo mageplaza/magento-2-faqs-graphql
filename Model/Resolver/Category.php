@@ -55,7 +55,7 @@ class Category implements ResolverInterface
         Data $helperData
     ) {
         $this->helperData = $helperData;
-        $this->filter = $filter;
+        $this->filter     = $filter;
     }
 
     /**
@@ -64,8 +64,8 @@ class Category implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
-        $searchResult = $this->filter->getResult($searchCriteria, 'category');
-        $items        = $this->helperData->getApiSearchResult($searchResult);
+        $searchResult   = $this->filter->getResult($searchCriteria, 'category');
+        $items          = $this->helperData->getApiSearchResult($searchResult);
 
         $pageInfo = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 

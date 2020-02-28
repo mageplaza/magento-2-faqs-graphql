@@ -56,8 +56,8 @@ class Product implements ResolverInterface
         Data $helperData,
         Filter $filterQuery
     ) {
-        $this->filterQuery           = $filterQuery;
-        $this->helperData = $helperData;
+        $this->filterQuery = $filterQuery;
+        $this->helperData  = $helperData;
     }
 
     /**
@@ -66,16 +66,12 @@ class Product implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         /** @var Article $article */
-        $article       = $value['model'];
+        $article           = $value['model'];
         $productCollection = $article->getSelectedProductsCollection();
-        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'product');
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection);
-        $items = $this->helperData->getApiSearchResult($searchResult);
-        $pageInfo          = $this->helperData->getPageInfo(
-            $items,
-            $searchCriteria,
-            $args
-        );
+        $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'product');
+        $searchResult      = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection);
+        $items             = $this->helperData->getApiSearchResult($searchResult);
+        $pageInfo          = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [
             'total_count' => $searchResult->getTotalCount(),

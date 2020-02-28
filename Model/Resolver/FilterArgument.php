@@ -66,7 +66,7 @@ class FilterArgument implements FieldEntityAttributesInterface
         foreach ($entities as $entity) {
             /** @var Field $field */
             foreach ($this->config->getConfigElement($entity)->getFields() as $field) {
-                $fieldName = $field->getName();
+                $fieldName          = $field->getName();
                 $fields[$fieldName] = ['type' => 'String', 'fieldName' => $fieldName];
             }
         }

@@ -63,18 +63,14 @@ class Category implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        $article          = $value['model'];
+        $article = $value['model'];
         /** @var \Mageplaza\Faqs\Model\Article $article */
         $articleCollection = $article->getSelectedCategoriesCollection();
 
-        $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'categories');
-        $searchResult      = $this->filterQuery->getResult($searchCriteria, 'category', $articleCollection);
-        $items             = $this->helperData->getApiSearchResult($searchResult);
-        $pageInfo          = $this->helperData->getPageInfo(
-            $items,
-            $searchCriteria,
-            $args
-        );
+        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
+        $searchResult   = $this->filterQuery->getResult($searchCriteria, 'category', $articleCollection);
+        $items          = $this->helperData->getApiSearchResult($searchResult);
+        $pageInfo       = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [
             'total_count' => $searchResult->getTotalCount(),

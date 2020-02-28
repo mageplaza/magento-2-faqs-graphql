@@ -21,12 +21,12 @@ type Query {
         filter: MpMageplazaFaqsCategoryFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategoryList attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.")
+    ):MpMageplazaFaqsCategoryListOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for categories that match the criteria specified in the filter.")
     MpMageplazaFaqsGetArticles(
         filter: MpMageplazaFaqsArticlesFilterInput @doc(description: "Identifies which MpMageplazaFaqsArticles attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Article") @doc(description: "The query searches for MpMageplazaFaqsArticles that match the criteria specified in the filter.")
+    ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Article") @doc(description: "The query searches for articles that match the criteria specified in the filter.")
 }
 
 type Mutation {
@@ -88,7 +88,7 @@ input MpMageplazaFaqsArticlesFilterInput {
     created_at: FilterTypeInput @doc(description: "Created At")
 }
 
-type MpMageplazaFaqsCategorysOutput {
+type MpMageplazaFaqsCategoryListOutput {
     total_count: Int @doc(description: "The total number of results returned when a query is applied"),
     items: [MpMageplazaFaqsCategory] @doc(description: "MpMageplazaFaqsCategory data is satisfied"),
     pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
@@ -147,10 +147,10 @@ type MpMageplazaFaqsArticle {
     updated_at: String @doc(description: "Updated At")
     created_at: String @doc(description: "Created At")
     categories(
-        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategorys attributes to search for and return.")
+        filter: MpMageplazaFaqsCategoryFilterInput @doc(description: "Identifies which Categories attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ): MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
+    ): MpMageplazaFaqsCategoryListOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
     products(
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
