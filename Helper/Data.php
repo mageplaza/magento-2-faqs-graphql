@@ -75,7 +75,6 @@ class Data extends CoreHelper
         $searchCriteria->setPageSize($args['pageSize']);
 
         return $searchCriteria;
-
     }
 
     /**
@@ -117,15 +116,18 @@ class Data extends CoreHelper
 
     /**
      * @param SearchResultsInterface $searchResult
+     *
      * @return array
      */
-    public function getApiSearchResult(SearchResultsInterface $searchResult) {
+    public function getApiSearchResult(SearchResultsInterface $searchResult)
+    {
         $items = [];
         /** @var AbstractModel $item */
         foreach ($searchResult->getItems() as $item) {
             $item->setData('model', $item);
             $items[$item->getId()] = $item->getData();
         }
+
         return $items;
     }
 

@@ -53,10 +53,9 @@ class Article implements ResolverInterface
     public function __construct(
         Data $helperData,
         Filter $filterQuery
-    )
-    {
+    ) {
         $this->filterQuery = $filterQuery;
-        $this->helperData = $helperData;
+        $this->helperData  = $helperData;
     }
 
     /**
@@ -65,17 +64,17 @@ class Article implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         /** @var \Mageplaza\Faqs\Model\Category $category */
-        $category = $value['model'];
+        $category          = $value['model'];
         $articleCollection = $category->getSelectedArticlesCollection();
-        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'articles');
-        $searchResult = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection);
-        $items = $this->helperData->getApiSearchResult($searchResult);
-        $pageInfo = $this->helperData->getPageInfo($items, $searchCriteria, $args);
+        $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'articles');
+        $searchResult      = $this->filterQuery->getResult($searchCriteria, 'article', $articleCollection);
+        $items             = $this->helperData->getApiSearchResult($searchResult);
+        $pageInfo          = $this->helperData->getPageInfo($items, $searchCriteria, $args);
 
         return [
             'total_count' => $searchResult->getTotalCount(),
-            'items' => $items,
-            'pageInfo' => $pageInfo
+            'items'       => $items,
+            'pageInfo'    => $pageInfo
         ];
     }
 }
