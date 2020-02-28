@@ -18,7 +18,7 @@
 
 type Query {
     MpMageplazaFaqsCategoryList(
-        filter: MpMageplazaFaqsCategorysFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategoryList attributes to search for and return.")
+        filter: MpMageplazaFaqsCategoryFilterInput @doc(description: "Identifies which MpMageplazaFaqsCategoryList attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
     ):MpMageplazaFaqsCategorysOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Category") @doc(description: "The query searches for MpMageplazaFaqsCategorys that match the criteria specified in the filter.")
@@ -48,7 +48,7 @@ type MpMageplazaFaqsQuestionOutput {
     status: Boolean @doc(description: "Status after submit question.")
 }
 
-input MpMageplazaFaqsCategorysFilterInput {
+input MpMageplazaFaqsCategoryFilterInput {
     category_id: FilterTypeInput @doc(description: "Category Id")
     name: FilterTypeInput @doc(description: "Name")
     description: FilterTypeInput @doc(description: "Description")

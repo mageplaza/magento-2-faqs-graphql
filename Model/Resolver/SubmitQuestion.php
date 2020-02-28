@@ -36,7 +36,6 @@ use Mageplaza\Faqs\Helper\Data;
 use Mageplaza\Faqs\Model\Article as ArticleModel;
 use Mageplaza\Faqs\Model\ArticleFactory;
 use Mageplaza\Faqs\Model\Filter\Query\Filter;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class SubmitQuestion
@@ -70,11 +69,6 @@ class SubmitQuestion implements ResolverInterface
     protected $_date;
 
     /**
-     * @var LoggerInterface
-     */
-    protected $_logger;
-
-    /**
      * @var StoreManagerInterface
      */
     protected $_storeManager;
@@ -97,7 +91,6 @@ class SubmitQuestion implements ResolverInterface
      *
      * @param Filter $filter
      * @param DateTime $dateTime
-     * @param LoggerInterface $logger
      * @param StoreManagerInterface $storeManager
      * @param ArticleFactory $articleFactory
      * @param ProductRepository $productRepository
@@ -107,7 +100,6 @@ class SubmitQuestion implements ResolverInterface
     public function __construct(
         Filter $filter,
         DateTime $dateTime,
-        LoggerInterface $logger,
         StoreManagerInterface $storeManager,
         ArticleFactory $articleFactory,
         ProductRepository $productRepository,
@@ -117,7 +109,6 @@ class SubmitQuestion implements ResolverInterface
         $this->filter            = $filter;
         $this->helper            = $helper;
         $this->_date             = $dateTime;
-        $this->_logger           = $logger;
         $this->_storeManager     = $storeManager;
         $this->_articleFactory   = $articleFactory;
         $this->productRepository = $productRepository;

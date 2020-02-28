@@ -26,6 +26,7 @@ use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
+use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData as CoreHelper;
@@ -120,8 +121,9 @@ class Data extends CoreHelper
      */
     public function getApiSearchResult(SearchResultsInterface $searchResult) {
         $items = [];
+        /** @var AbstractModel $item */
         foreach ($searchResult->getItems() as $item) {
-            $item->setModel($item);
+            $item->setData('model', $item);
             $items[$item->getId()] = $item->getData();
         }
         return $items;
