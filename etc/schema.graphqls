@@ -27,6 +27,9 @@ type Query {
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
     ):MpMageplazaFaqsArticlesOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Article") @doc(description: "The query searches for articles that match the criteria specified in the filter.")
+    MpMageplazaFaqsGetConfig(
+        storeId: Int @doc(description: "Store Id")
+    ):MpMageplazaFaqsConfigOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Config") @doc(description: "The query get data for faqs config.")
 }
 
 type Mutation {
@@ -101,6 +104,72 @@ type MpMageplazaFaqsArticlesOutput {
 type ProductsOutputNoPage {
     total_count: Int @doc(description: "The number of categories returned"),
     items: [MpMageplazaFaqsProduct] @doc(description: "An array of categories that match the specified search criteria")
+}
+type MpMageplazaFaqsConfigOutput {
+    general: MpMageplazaFaqsGeneralConfigOutput,
+    faq_home_page: MpMageplazaFaqsHomePageConfigOutput,
+    product_tab: MpMageplazaFaqsProductTabConfigOutput,
+    term_condition: MpMageplazaFaqsTermConditionConfigOutput
+}
+type MpMageplazaFaqsGeneralConfigOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    faq_color: String @doc(description: "Faqs Color"),
+    is_show_helpful: Boolean @doc(description: "Is Show Helpful"),
+    rating_restrict: String @doc(description: "Rating Restrict"),
+    question: MpMageplazaFaqsGeneralQuestionOutput,
+    question_detail_page: MpMageplazaFaqsGeneralQuestionDetailOutput,
+    search_box: MpMageplazaFaqsGeneralSearchOutput
+}
+type MpMageplazaFaqsHomePageConfigOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    route: String @doc(description: "Route"),
+    link: String @doc(description: "Insert FAQ link on"),
+    title: String @doc(description: "Page Title"),
+    layout: String @doc(description: "Page Layout"),
+    design_style: String @doc(description: "FAQ style"),
+    category_column: Int @doc(description: "Categories columns"),
+    question_style: String @doc(description: "Question style"),
+    limit_question: Int @doc(description: "Limit question per category	"),
+    seo: MpMageplazaFaqsHomePageSeoOutput
+}
+type MpMageplazaFaqsProductTabConfigOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    title: String @doc(description: "Tab Title"),
+    limit_question: Int @doc(description: "Limit question"),
+    design_style: String @doc(description: "FAQ style"),
+    question_style: String @doc(description: "Question style"),
+    show_name: Boolean @doc(description: "Show Name"),
+    show_date: Boolean @doc(description: "Show Date of Question/Answer")
+}
+type MpMageplazaFaqsTermConditionConfigOutput {
+    enabled: Boolean @doc(description: "Show Terms & Conditions when submitting questions	"),
+    popup_label: Boolean @doc(description: "Link popup label"),
+    title: Boolean @doc(description: "Title"),
+    content: Boolean @doc(description: "Content")
+}
+type MpMageplazaFaqsHomePageSeoOutput {
+    meta_title: String @doc(description: "Meta Title"),
+    meta_description: String @doc(description: "Meta Description"),
+    meta_keyword: String @doc(description: "Meta Keyword"),
+    meta_robot: String @doc(description: "Robots")
+}
+type MpMageplazaFaqsGeneralQuestionOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    max_char: Int @doc(description: "Max char"),
+    need_approved: Boolean @doc(description: "Need Approved"),
+    name_field: String @doc(description: "Is required Name field"),
+    email_field: String @doc(description: "Is required Email field"),
+    show_notification: Boolean @doc(description: "Is show Email notification checkbox")
+}
+type MpMageplazaFaqsGeneralQuestionDetailOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    max_char: Int @doc(description: "Max char"),
+    layout: String @doc(description: "Detail Layout")
+}
+type MpMageplazaFaqsGeneralSearchOutput {
+    enabled: Boolean @doc(description: "Is Enabled"),
+    title: String @doc(description: "Search Box Title"),
+    description: String @doc(description: "Search Box Description")
 }
 
 type MpMageplazaFaqsCategory {
