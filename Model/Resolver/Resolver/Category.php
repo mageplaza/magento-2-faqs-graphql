@@ -67,7 +67,7 @@ class Category implements ResolverInterface
         /** @var \Mageplaza\Faqs\Model\Article $article */
         $articleCollection = $article->getSelectedCategoriesCollection();
 
-        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
+        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'faqs_category');
         $searchResult   = $this->filterQuery->getResult($searchCriteria, 'category', $articleCollection);
         $items          = $this->helperData->getApiSearchResult($searchResult);
         $pageInfo       = $this->helperData->getPageInfo($items, $searchCriteria, $args);

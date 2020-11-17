@@ -24,13 +24,13 @@
     <type name="Magento\Framework\GraphQl\Query\Resolver\Argument\FieldEntityAttributesPool">
         <arguments>
             <argument name="attributesInstances" xsi:type="array">
-                <item name="categories" xsi:type="object">
+                <item name="mp_category" xsi:type="object">
                     Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
                 </item>
                 <item name="articles" xsi:type="object">
                     Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
                 </item>
-                <item name="products" xsi:type="object">
+                <item name="mp_product" xsi:type="object">
                     Mageplaza\FaqsGraphQl\Model\Resolver\FilterArgument
                 </item>
             </argument>

@@ -215,12 +215,12 @@ type MpMageplazaFaqsArticle {
     meta_robots: String @doc(description: "Meta Robots")
     updated_at: String @doc(description: "Updated At")
     created_at: String @doc(description: "Created At")
-    categories(
+    faqs_categories(
         filter: MpMageplazaFaqsCategoryFilterInput @doc(description: "Identifies which Categories attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
     ): MpMageplazaFaqsCategoryListOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Category") @doc(description: "The categories assigned to a Article")
-    products(
+    faqs_products(
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
     ): ProductsOutputNoPage @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\Resolver\\Product") @doc(description: "The products assigned to a Article")

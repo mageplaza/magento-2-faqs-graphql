@@ -68,7 +68,7 @@ class Product implements ResolverInterface
         /** @var Article $article */
         $article           = $value['model'];
         $productCollection = $article->getSelectedProductsCollection();
-        $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'product');
+        $searchCriteria    = $this->helperData->validateAndAddFilter($args, 'faqs_product');
         $searchResult      = $this->filterQuery->getResult($searchCriteria, 'product', $productCollection);
         $items             = $this->helperData->getApiSearchResult($searchResult);
         $pageInfo          = $this->helperData->getPageInfo($items, $searchCriteria, $args);
