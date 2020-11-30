@@ -63,7 +63,7 @@ class Category implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'categories');
+        $searchCriteria = $this->helperData->validateAndAddFilter($args, 'mp_category');
         $searchResult   = $this->filter->getResult($searchCriteria, 'category');
         $items          = $this->helperData->getApiSearchResult($searchResult);
 
