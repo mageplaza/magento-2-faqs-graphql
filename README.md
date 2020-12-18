@@ -1,14 +1,14 @@
 # Magento 2 FAQs GraphQL / PWA
 
+**Magento 2 FAQ GraphQL is a part of Mageplaza FAQ extension that adds GraphQL features.** This supports PWA compatibility.
+
 [Mageplaza FAQ for Magento 2](https://www.mageplaza.com/magento-2-faq-extension/) enables you to create a comprehensive FAQ page for your online store where visitors can find answers to questions about your products and services. 
 
 You can build a neat and SEO-friendly FAQ homepage with the most convenience for customers to look up the information. The instant search box is placed in the center of the page, making it easier for customers to search for what they need. The FAQ page will be well-organized and user-friendly by classifying questions into specific categories. The number of questions included in a section is totally determined by the store admin. 
 
 The store admin can configure the question FAQ homepage from the admin backend for SEO optimization. This helps increase the FAQ page search ranking and provides an easy-to-navigate the FAQ page easily. Each category can be customized to be more friendly with users by adding icons or changing the questions, positions of the category. 
 
-The store admin can customize the look of the FAQ page from the backend configuration. It’s easy to change the page title, theme color, page layout, FAQ style, categories columns, and limit the question included in each category. 
-
-Notably, **Magento 2 FAQ GraphQL is a part of Mageplaza FAQ extension that adds GraphQL features.** This supports PWA compatibility. 
+The store admin can customize the look of the FAQ page from the backend configuration. It’s easy to change the page title, theme color, page layout, FAQ style, categories columns, and limit the question included in each category.  
 
 ## 1. How to install
 Run the following command in Magento 2 root folder:
