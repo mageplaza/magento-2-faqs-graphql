@@ -1,4 +1,4 @@
-# Magento 2 FAQs GraphQL / PWA
+# Magento 2 FAQs GraphQL
 
 **Magento 2 FAQ GraphQL is a part of Mageplaza FAQ extension that adds GraphQL features.** This supports PWA compatibility.
 
