@@ -36,6 +36,9 @@ type Mutation {
     MpMageplazaFaqsAddQuestions(
         input: MpMageplazaFaqsQuestionInput! @doc(description: "Information of the question is submit.")
     ):MpMageplazaFaqsQuestionOutput @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\SubmitQuestion") @doc(description: "Add new question.")
+    MpMageplazaFaqsAddHelpful(
+        input: MpMageplazaFaqsHelpfulInput @doc(description: "Information of the helpful is submit.")
+    ):Boolean @resolver(class: "Mageplaza\\FaqsGraphQl\\Model\\Resolver\\SubmitHelpful") @doc(description: "submit helpful.")
 }
 
 input MpMageplazaFaqsQuestionInput {
@@ -44,6 +47,11 @@ input MpMageplazaFaqsQuestionInput {
     email: String @doc(description: "Email is guest or customer.")
     product_id: Int @doc(description: "The Product id number assigned to the question.")
     is_notify: String @doc(description: "Receive email notification if the question is answered.")
+}
+
+input MpMageplazaFaqsHelpfulInput {
+    articleId: Int! @doc(description: "The article Id.")
+    isHelpful: Boolean! @doc(description: "Is helpful.")
 }
 
 type MpMageplazaFaqsQuestionOutput {
